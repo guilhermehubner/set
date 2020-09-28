@@ -7,7 +7,6 @@ import (
 
 type entry struct {
 	key    interface{}
-	value  interface{}
 	before *entry
 	after  *entry
 }
@@ -35,8 +34,7 @@ func (l *linkedHashMap) Put(key, value interface{}) {
 
 	hash := l.hash(key)
 	newEntry := &entry{
-		key:   key,
-		value: value,
+		key: key,
 	}
 
 	if _, ok := l.table[hash]; ok {
@@ -69,7 +67,7 @@ func (l *linkedHashMap) Get(key interface{}) interface{} {
 	tmp := l.table[hash]
 	for tmp != nil {
 		if tmp.key == key {
-			return tmp.value
+			return tmp.key
 		}
 		tmp = tmp.after
 	}
